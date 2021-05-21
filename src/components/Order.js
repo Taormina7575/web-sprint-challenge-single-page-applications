@@ -13,13 +13,13 @@ export default function Order({props}) {
      <div>
          <MainName>Name: {props.name}</MainName>
          <ul>
-             <ListItem>Size: {props.size}</ListItem>
+             <ListItem>Size: {props.size === 'large' ? 'bigguy' : 'failed'}</ListItem>
              <ListItem>Special Request: {props.special}</ListItem>
-             <ListItem>Sausage: {props.sausage ? 'yes' : 'no'}</ListItem>
-             <ListItem>Pineapple: {props.pineapple ? 'yes' : 'no'}</ListItem>
-             <ListItem>Anchovies: {props.anchovies ? 'yes' : 'no'}</ListItem>
-             <ListItem>Peppers: {props.peppers ? 'yes' : 'no'}</ListItem>
-             <ListItem>Pepperoni: {props.pepperoni ? 'yes' : 'no'}</ListItem>
+             <ListItem>Sausage: {props.sausage ? 'sausagetest' : 'no'}</ListItem>
+             <ListItem>Pineapple: {props.pineapple ? 'pineappletest' : 'no'}</ListItem>
+             <ListItem>Anchovies: {props.anchovies ? 'anchoviestest' : 'no'}</ListItem>
+             <ListItem>Peppers: {props.peppers ? 'pepperstest' : 'no'}</ListItem>
+             <ListItem>Pepperoni: {props.pepperoni ? 'pepperonitest' : 'no'}</ListItem>
          </ul>
      </div>
  )
