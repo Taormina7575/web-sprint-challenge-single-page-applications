@@ -1,0 +1,9 @@
+.navLink {
+    text-decoration: none;
+    background-color: red;
+    color: black;
+    border-radius: 1rem;
+    padding: 1rem;
+    font-size: 3rem;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
