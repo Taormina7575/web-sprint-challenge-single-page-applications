@@ -70,4 +70,7 @@ describe('Lambda Eats', () => {
         sizeInput().select('large')
         subBtn().should('not.be.disabled')
     })
+
+    
+
 })

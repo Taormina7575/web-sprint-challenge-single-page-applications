@@ -3,6 +3,7 @@ import styled from "styled-components";
 import * as yup from "yup";
 import schema from "../validation/FormSchema";
 import axios from "axios";
+import Order from './Order'
 
 //*! Styles !!!!!!!
 const FormContainer = styled.div`
@@ -21,7 +22,7 @@ const FormHeader = styled.h1`
 
 const FormCat = styled.div`
   background-color: lightgray;
-  width: 35%;
+  width: 100%;
   display: flex;
   justify-content: space-around;
   margin-bottom: 1rem;
@@ -44,7 +45,7 @@ const FormError = styled.p`
 const FormText = styled.input`
   border: 2px solid black;
   margin-left: 4rem;
-  width: 25%;
+  width: 75%;
 `;
 const FormSelect = styled.select`
   border: 2px solid black;
@@ -71,8 +72,19 @@ const CheckLabel = styled.label`
   display: flex;
   align-items: center;
   justify-content: space-around;
-  width: 25%;
+  width: 100%;
 `;
+
+const FormFieldContainer = styled.div`
+    width: 35%;
+`
+
+const BothContainer = styled.div`
+display: flex;
+`
+const OrderContainer = styled.div`
+    margin-left: 5rem;
+`
 //*! End of Styles!!!!!!
 
 const initialFormValues = {
@@ -93,10 +105,13 @@ const initialFormErrors = {
 
 const initialDisabled = true;
 
+const initialOrders = [];
+
 export default function Form() {
   const [formValues, setFormValues] = useState(initialFormValues);
   const [formErrors, setFormErrors] = useState(initialFormErrors);
   const [disabled, setDisabled] = useState(initialDisabled);
+  const [orders, setOrders] = useState(initialOrders)
 
   const change = (evt) => {
     const { name, value, checked, type } = evt.target;
@@ -151,12 +166,17 @@ export default function Form() {
     axios
       .post("https://reqres.in/api/orders", newOrder)
       .then((res) => {
-        console.log(res.data);
+        console.log(res.data)
+        setOrders([res.data, ...orders])
       })
       .catch((err) => {
         console.log(err);
       });
   };
+
+  useEffect(() => {
+    console.log(orders)
+  }, [orders])
 
   return (
     <main>
@@ -166,6 +186,8 @@ export default function Form() {
           alt="pizza"
         ></FormImg>
         <FormHeader>Build Your Own Pizza!</FormHeader>
+        <BothContainer>
+        <FormFieldContainer>
         <form id="pizza-form" onSubmit={submit}>
           <FormCat>
             <FormCatName>What Is Your Name?</FormCatName>
@@ -265,6 +287,17 @@ export default function Form() {
             </SubmitButton>
           </FormCat>
         </form>
+        </FormFieldContainer>
+        <OrderContainer>
+        {
+            orders.map((order, idx) => {
+                return(
+                    <Order props={order} key={idx}></Order>
+                )
+            })
+        }
+        </OrderContainer>
+        </BothContainer>
       </FormContainer>
     </main>
   );
